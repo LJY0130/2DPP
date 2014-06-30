@@ -7,7 +7,6 @@
 #include <time.h>
 #include <list>
 #include <sstream> // wostringstream
-#include <iomanip> // setw, setfill
 #include "BaseType.h"
 #include "Utility.hpp"
 #include "Block.h"

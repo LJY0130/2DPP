@@ -24,8 +24,6 @@ public :
 private :
 	bool _load_detail(LPCTSTR szFileName);
 private :
-
-
 	HBITMAP hBitmap;
 	Rect rcSrc;
 	Rect rcDest;

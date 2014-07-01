@@ -20,6 +20,10 @@ public :
 
 	void SetDelay(const DWORD& delay);
 	void SetLoop(bool _bLoop = true);
+	
+	void Reset();
+
+	bool IsPlaying() const;
 
 private :
 	ShotType shotlist;

@@ -179,6 +179,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Character.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\CharacterState.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\winmain.cpp"
 				>
 			</File>
@@ -194,6 +202,10 @@
 			>
 			<File
 				RelativePath=".\Block.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Character.h"
 				>
 			</File>
 			<File
@@ -248,6 +260,14 @@
 			</File>
 			<File
 				RelativePath=".\DoubleBuffer.h"
+				>
+			</File>
+			<File
+				RelativePath=".\FSM.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\FSM.h"
 				>
 			</File>
 			<File

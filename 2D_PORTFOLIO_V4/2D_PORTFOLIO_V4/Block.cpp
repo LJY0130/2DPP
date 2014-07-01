@@ -32,8 +32,6 @@ void Block::Update(DWORD tick)
 	}
 	if(addy >= 448)
 		BrockDrop = false;
-
-
 }
 void Block::Draw(HDC hdc)
 {
@@ -44,14 +42,16 @@ void Block::Draw(HDC hdc)
 		pblockImg->SetTransparent(RGB(255,255,255));
 		pblockImg->SetRect(Rect(Point(pos.x, pos.y+addy), Size(BlockSize,BlockSize)));
 		pblockImg->Draw(hdc);
-	}
-	if(BrockDrop == false)
+	}*/
+	/*if(BrockDrop == false)
 	{*/
 		Image* pblockImg = new Image;
 		pblockImg->Load(_T("BlockSheet01b.bmp"), Rect(16, 16*i, 32, 16*i+16));
 		pblockImg->SetTransparent(RGB(255,255,255));
 		pblockImg->SetRect(Rect(Point(pos.x, pos.y+addy), Size(BlockSize,BlockSize)));
 		pblockImg->Draw(hdc);
+		
+		BrockDrop = true;
 	//}
 }
 void Block::ChangeHealth(const int& diff)

@@ -76,3 +76,12 @@ void Animation::SetLoop(bool _bLoop/*=true*/)
 {
 	bLoop = _bLoop;
 }
+void Animation::Reset()
+{
+	index = 0;
+	bDoNotDraw = false;
+}
+bool Animation::IsPlaying() const
+{
+	return !bDoNotDraw;
+}

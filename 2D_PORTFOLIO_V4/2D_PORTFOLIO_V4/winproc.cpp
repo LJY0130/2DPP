@@ -10,6 +10,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	static Image sidebar;		// 사이드바
 	static Image map;			// 맵
 
+	static Point AllBlock[72];	// 전체좌표
+
 	static Block StartBlock[16];// 시작 블록
 	static Point BaseBlock[16];	// 좌표
 
@@ -58,7 +60,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			}
 		}
 
-		if(BrockDrop==false)
+		if(!BrockDrop)
 		{
 			DropStart.x = 384+(BlockSize/2)+(BlockSize*j);
 			DropStart.y = 16+(BlockSize/2);
@@ -109,7 +111,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			StartBlock[a].Draw(backbuffer);
 		}
 
-		if(BrockDrop==true)
+		if(BrockDrop)
 		{
 			block.SetPosition(DropStart);
 			block.Draw(backbuffer);
@@ -139,10 +141,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 		// TODO
 			
-		if(BrockDrop==true)
+		if(BrockDrop)
 			block.Update(dt);
-	//	else if
-	//		BrockDrop=false;
+
+		if(DropStart.y > 400)
+			BrockDrop=false;
 
 
 		dt = ::GetTickCount() - st;

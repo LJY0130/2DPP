@@ -30,12 +30,16 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 	static Sound BGM;
 
+	static Character Ninja;
+
 
 	if (uMsg == WM_CREATE)
 	{
 		Rect rc;
 		::GetClientRect(hWnd, &rc);
 		backbuffer.Attach(hWnd);
+
+		Ninja.SetPosition(Point(rc.width()/2, rc.bottom/2+128-32));
 
 		BGM.Load("sound63.mp3");
 		BGM.SetLoop(true);
@@ -116,6 +120,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			block.SetPosition(DropStart);
 			block.Draw(backbuffer);
 		}
+		
+		Ninja.Draw(backbuffer);
 
 		backbuffer.Draw();
 
@@ -140,7 +146,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		::GetClientRect(hWnd, &rc);
 
 		// TODO
-			
+
+		Ninja.Input(dt);
+		Ninja.Update(dt);
+
 		if(BrockDrop)
 			block.Update(dt);
 

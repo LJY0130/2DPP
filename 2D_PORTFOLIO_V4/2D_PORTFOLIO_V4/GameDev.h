@@ -11,6 +11,8 @@
 #include "Animation.h"
 #include "DoubleBuffer.h"
 #include "Sound.h"
+#include "Character.h"
+
 
 #include "Block.h"
 

@@ -3,6 +3,9 @@
 #include "FSM.h"
 #include "BaseType.h"
 #include "Animation.h"
+#include "Bullet.h"
+#include "Block.h"
+#include "Collision.h"
 
 enum Character_State_id
 {
@@ -31,6 +34,8 @@ public :
 protected :
 	Point* pos;
 	Animation* pAni;
+
+
 };
 
 class Character : public StateMachine
@@ -55,6 +60,15 @@ public :
 	virtual void Update(DWORD tick);
 	virtual void Draw(HDC hdc);
 	virtual void Leave();
+
+private :
+	// fire 
+	DWORD fire_dt;
+	DWORD fire_delay;
+
+	Point ptEnd;
+
+	LONG theta;
 };
 
 class CS_Go_Right : public CharacterState

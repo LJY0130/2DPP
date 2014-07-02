@@ -23,6 +23,7 @@ void CharacterState::SetPositionLink(Point& p)
 // CS_RIdle Impl
 /////////////////////////////////////////////////
 CS_RIdle::CS_RIdle()
+: fire_dt(0), fire_delay(500), theta(0)	
 {
 	pAni = new Animation;
 	for (int i = 0; i < 4; i++)
@@ -51,6 +52,20 @@ void CS_RIdle::Input(DWORD tick)
 	if ((::GetAsyncKeyState(VK_SPACE) & 0x8000) == 0x8000)
 	{
 		m_pMachine->transition(RFIRE);
+
+		if (fire_dt > fire_delay)
+		{
+			Bullet* pMissile = new Bullet;
+			pMissile->SetPosition(ptEnd);
+			pMissile->SetRadius(10);
+			pMissile->SetAngle(float(theta));
+
+			ObjectDepot.push(pMissile);
+
+			fire_dt = 0;
+		}
+		fire_dt += tick;
+
 	}
 	if ((::GetAsyncKeyState(VK_RIGHT) & 0x8000) == 0x8000)
 	{
@@ -60,6 +75,10 @@ void CS_RIdle::Input(DWORD tick)
 	{
 		m_pMachine->transition(GO_LEFT);
 	}
+	/*if ((::GetAsyncKeyState(VK_UP) & 0x8000) == 0x8000)
+	{
+		m_pMachine->transition(GO_LEFT);
+	}*/
 }
 void CS_RIdle::Update(DWORD tick)
 {
@@ -84,17 +103,17 @@ void CS_RIdle::Leave()
 CS_Go_Right::CS_Go_Right()
 {
 	pAni = new Animation;
-	for (int i = 0; i < 8; i++)
+	for (int i = 0; i < 4; i++)
 	{
 		Image* pImg = new Image;
-		pImg->Load(_T("Ninja.bmp"), Rect(170*i,0,170 + 170*i,170));
-		pImg->SetTransparent(RGB(255,0,255));
+		pImg->Load(_T("Ninja.bmp"), Rect(16*i,16,16 + 16*i,32));
+		pImg->SetTransparent(RGB(255, 255, 255));
 
 		pAni->AddShot(pImg);
 	}
 
 	pAni->SetLoop();
-	pAni->SetDelay(60);
+	pAni->SetDelay(100);
 }
 CS_Go_Right::~CS_Go_Right()
 {
@@ -107,7 +126,7 @@ void CS_Go_Right::Enter()
 }
 void CS_Go_Right::Input(DWORD tick)
 {
-	if ((::GetAsyncKeyState(VK_LEFT) & 0x8000) != 0x8000)
+	if ((::GetAsyncKeyState(VK_RIGHT) & 0x8000) != 0x8000)
 	{
 		m_pMachine->transition(RIDLE);
 	}
@@ -128,13 +147,13 @@ void CS_Go_Right::Update(DWORD tick)
 		pAni->Update(tick);
 	}
 
-	*pos = *pos + Point(-1,0);
+	*pos = *pos + Point(2,0);
 }
 void CS_Go_Right::Draw(HDC hdc)
 {
 	if (pAni)
 	{
-		pAni->SetRect(Rect(*pos, Size(170,170)));
+		pAni->SetRect(Rect(*pos, Size(64,64)));
 		pAni->Draw(hdc);
 	}
 }
@@ -149,17 +168,19 @@ void CS_Go_Right::Leave()
 CS_RFire::CS_RFire()
 {
 	pAni = new Animation;
-	for (int i = 0; i < 12; i++)
+	for (int i = 0; i < 4; i++)
 	{
 		Image* pImg = new Image;
-		pImg->Load(_T("Ninja.bmp"), Rect(16*i,32,16 + 16*i,64));
-		pImg->SetTransparent(RGB(255,0,255));
+		pImg->Load(_T("Ninja.bmp"), Rect(16*i,32,16 + 16*i,48));
+		pImg->SetTransparent(RGB(255, 255, 255));
 
 		pAni->AddShot(pImg);
 	}
 
 	pAni->SetDelay(60);
 }
+
+
 CS_RFire::~CS_RFire()
 {
 }
@@ -185,7 +206,7 @@ void CS_RFire::Draw(HDC hdc)
 {
 	if (pAni)
 	{
-		pAni->SetRect(Rect(*pos, Size(170,170)));
+		pAni->SetRect(Rect(*pos, Size(64, 64)));
 		pAni->Draw(hdc);
 	}
 }
@@ -203,7 +224,7 @@ CS_LIdle::CS_LIdle()
 	for (int i = 0; i < 4; i++)
 	{
 		Image* pImg = new Image;
-		pImg->Load(_T("Ninja.bmp"), Rect(16*i,0,16 + 16*i,16));
+		pImg->Load(_T("Ninja.bmp"), Rect(16*i,96,16 + 16*i,112));
 		pImg->SetTransparent(RGB(255, 255, 255));
 
 		pAni->AddShot(pImg);
@@ -259,16 +280,16 @@ void CS_LIdle::Leave()
 CS_Go_Left::CS_Go_Left()
 {
 	pAni = new Animation;
-	for (int i = 0; i < 8; i++)
+	for (int i = 0; i < 4; i++)
 	{
 		Image* pImg = new Image;
-		pImg->Load(_T("Ninja.bmp"), Rect(170*i,0,170 + 170*i,170));
-		pImg->SetTransparent(RGB(255,0,255));
+		pImg->Load(_T("Ninja.bmp"), Rect(16*i,112,16 + 16*i,128));
+		pImg->SetTransparent(RGB(255, 255, 255));
 		pAni->AddShot(pImg);
 	}
 
 	pAni->SetLoop();
-	pAni->SetDelay(60);
+	pAni->SetDelay(100);
 }
 CS_Go_Left::~CS_Go_Left()
 {
@@ -302,13 +323,13 @@ void CS_Go_Left::Update(DWORD tick)
 		pAni->Update(tick);
 	}
 
-	*pos = *pos + Point(-1,0);
+	*pos = *pos + Point(-2,0);
 }
 void CS_Go_Left::Draw(HDC hdc)
 {
 	if (pAni)
 	{
-		pAni->SetRect(Rect(*pos, Size(170,170)));
+		pAni->SetRect(Rect(*pos, Size(64, 64)));
 		pAni->Draw(hdc);
 	}
 }
@@ -322,12 +343,11 @@ void CS_Go_Left::Leave()
 CS_LFire::CS_LFire()
 {
 	pAni = new Animation;
-	for (int i = 0; i < 12; i++)
+	for (int i = 0; i < 4; i++)
 	{
 		Image* pImg = new Image;
-		pImg->Load(_T("Ninja.bmp"), Rect(16*i,32,16 + 16*i,64));
-		pImg->SetTransparent(RGB(255,0,255));
-
+		pImg->Load(_T("Ninja.bmp"), Rect(16*i,128,16 + 16*i,144));
+		pImg->SetTransparent(RGB(255, 255, 255));
 		pAni->AddShot(pImg);
 	}
 
@@ -358,7 +378,7 @@ void CS_LFire::Draw(HDC hdc)
 {
 	if (pAni)
 	{
-		pAni->SetRect(Rect(*pos, Size(170,170)));
+		pAni->SetRect(Rect(*pos, Size(64, 64)));
 		pAni->Draw(hdc);
 	}
 }

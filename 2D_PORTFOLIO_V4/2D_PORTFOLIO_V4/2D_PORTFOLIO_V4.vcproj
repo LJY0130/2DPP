@@ -179,6 +179,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Bullet.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Character.cpp"
 				>
 			</File>
@@ -202,6 +206,10 @@
 			>
 			<File
 				RelativePath=".\Block.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Bullet.h"
 				>
 			</File>
 			<File
@@ -292,6 +300,10 @@
 			</File>
 			<File
 				RelativePath=".\Object.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ObjectManager.cpp"
 				>
 			</File>
 			<File

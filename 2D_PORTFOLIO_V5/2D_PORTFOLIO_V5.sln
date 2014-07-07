@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2D_PORTFOLIO_V5", "2D_PORTFOLIO_V5\2D_PORTFOLIO_V5.vcproj", "{90DC8ECD-352F-4C54-A8CC-4D89A0F66F47}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{90DC8ECD-352F-4C54-A8CC-4D89A0F66F47}.Debug|Win32.ActiveCfg = Debug|Win32
+		{90DC8ECD-352F-4C54-A8CC-4D89A0F66F47}.Debug|Win32.Build.0 = Debug|Win32
+		{90DC8ECD-352F-4C54-A8CC-4D89A0F66F47}.Release|Win32.ActiveCfg = Release|Win32
+		{90DC8ECD-352F-4C54-A8CC-4D89A0F66F47}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
